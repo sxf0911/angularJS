@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/angular-1.4.6.min.js"></script>
+</head>
+<body>
+    <div ng-controller="myCtrl">
+        <input type="text" ng-model="user.name">
+        <!--{{user.name | uppercase}}-->
+        {{msg}}
+        <br>
+        <select name="" id="" ng-model="selectedSite">
+            <option value="{{x.url}}" ng-repeat="x in sites">{{x.site}}</option>
+        </select>
+        <h1>你的选择是:{{selectedSite}}</h1>
+        <h1>你的选择是1:{{selectedds}}</h1>
+        <input type="button" ng-click="login()" value="点击">
+    </div>
+
+</body>
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller('myCtrl',['$scope',function ($scope) {
+        $scope.user = {
+            name:'',
+        };
+        $scope.msg = "请输入用户名";
+        $scope.$watch('user.name',function (newVal, oldVal) {
+            if(newVal){
+                if(newVal.length<7){
+                    $scope.msg = "太小了";
+                }else {
+                    $scope.msg = '';
+                }
+            }else{
+                $scope.msg = "请输入用户名";
+            }
+        });
+        $scope.sites = [
+            {site : "Google", url : "http://www.google.com"},
+            {site : "Runoob", url : "http://www.runoob.com"},
+            {site : "Taobao", url : "http://www.taobao.com"}
+        ];
+        $scope.login = function () {
+            $scope.selectedds = $scope.selectedSite;
+        }
+    }]);
+</script>
+</html>

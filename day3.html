@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/angular-1.4.6.min.js"></script>
+    <!--angualr-validation类库-->
+    <script src="js/angular-validation.min.js"></script>
+    <!--如果要添加自定义校验规则，则需要导入-->
+    <script src="js/angular-validation-rule.min.js"></script>
+</head>
+<body>
+    <form name="myForm">
+        <label>用户名(*)：</label>
+        <input type="text" name="username" ng-model="username" validator="required" required-error-message="用户名必填" required-success-message="用户名通过">
+        <button validation-submit="myForm">登录</button>
+        <button validation-reset="myForm">重置</button>
+    </form>
+</body>
+<script>
+    angular.module('myApp',['validation','validation.rule']);
+
+</script>
+</html>

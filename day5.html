@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/angular-1.4.6.min.js"></script>
+</head>
+<body>
+    <div ng-controller="myCtrl">
+        <ul>
+            <li ng-repeat="user in users">
+                姓名:{{user.name}}&nbsp;&nbsp;&nbsp;年龄：{{user.age}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller('myCtrl',function ($scope, $http) {
+        $http({
+            url:'data/users.json',
+            method:'get',
+        }).success(function (data,status,headers,config) {
+            $scope.users = data.users;
+        }).error(function (data) {
+            console.log(data);
+        })
+    })
+</script>
+</html>

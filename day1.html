@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/angular-1.4.6.min.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/controller/controllers.js"></script>
+
+</head>
+<body>
+    <input type="text" ng-model="name">
+    {{name}}
+    <div ng-view></div>
+
+    <div ng-init="quantity=1;cost=5">
+        　　<p>总价：<span ng-bind="quantity * cost"></span></p>
+    </div>
+
+    <div ng-init="quantity=1;cost=5">
+        <h2>价格计算器</h2>
+        数量：<input type="text" ng-model="quantity">
+        价格：<input type="text" ng-model="cost">
+        <p><b>总价：{{quantity * cost}}</b></p>
+    </div>
+
+    <my-directive></my-directive>
+
+    <!--<form action="" name="myForm">
+        Email: <input type="email" name="myAddress" ng-model="text">
+        <span ng-show="myForm.myAddress.$error.email">邮箱不合法</span>
+    </form>-->
+
+    <form name="myForm" ng-init="myText = 'test@runoob.com'">
+        　　Email:
+        　　<input type="email" name="myAddress" ng-model="myText" required>
+        　　<p>编辑邮箱地址，查看状态的改变。</p>
+        　　<h1>状态</h1>
+        　　<p>Valid:{{myForm.myAddress.$valid}}(如果输入的值是合法的则为true)。</p>
+        　　<p>Dirty:{{myForm.myAddress.$dirty}}(如果值改变则为true)。</p>
+        　　<p>Touched:{{myForm.myAddress.$touched}}(如果通过触屏点击则为true)。</p>
+    </form>
+
+</body>
+<script>
+    var app = angular.module('myApp',['ngRoute','myApp.controllers']);
+    app.controller('myCtrl',function ($scope,$location) {
+        $scope.name='tom';
+        $scope.jumpTo=function (viewName) {
+            $location.path(viewName+'/1');
+        }
+    }).controller('detailController',function ($scope, $routeParams) {
+        $scope.pid=$routeParams.pid;
+    });
+    app.config(function ($routeProvider) {
+        $routeProvider.when('/',{
+            templateUrl:'tpl/welcome.html',
+        }).when('/main',{
+            templateUrl:'tpl/main.html',
+            controller:'myCtrl',
+            resolve:{
+                users:function ($http) {
+                    return $http.get('data/users.json');
+                }
+            }
+        }).when('/detail/:pid',{
+            templateUrl:'tpl/detail.html',
+            controller:'detailController',
+        }).otherwise({
+            redirectTo:'/',
+        })
+    });
+
+    app.directive('myDirective',function () {
+        return {
+            replace:true,
+            template:"<h1>自定义指令</h1>"
+        }
+    })
+
+</script>
+</html>
