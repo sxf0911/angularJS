@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--类库-->
+    <script src="js/angular-1.4.6.min.js"></script>
+    <style>
+        .tips {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(100, 100, 100, .5);
+            font-size: 40px;
+            line-height: 100vh;
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-controller="ListController">
+    <div>
+        aa
+    </div>
+<div class="tips" ng-if="loading">
+    loading....
+</div>
+</body>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('ListController', function ($scope,$timeout) {
+        $scope.loading = true;
+        $timeout(function () {
+            $scope.loading = false;
+
+            /*$timeout(function() {
+                $scope.loading = true;
+            }, 3000);*/
+
+        },3000)
+    });
+</script>
+</html>
