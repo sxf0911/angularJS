@@ -12,6 +12,8 @@
     <it-button></it-button>
     <primary-button></primary-button>
 
+    <btn>itcast</btn>
+
 </body>
 <script>
     var app = angular.module('myApp', []);
@@ -31,6 +33,18 @@
         };
     }]);
 
+    app.directive('btn',[function () {
+        return {
+            /*scope:{
+                primary:'@primary',
+                lg:'@lg',
+                block:'@',
+            },*/
+            transclude:true,
+            replace:true,
+            template:'<button class="btn btn-primary" ng-transclude=""></button>',
+        };
+    }]);
 
 </script>
 </html>
