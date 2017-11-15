@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--类库-->
+    <script src="js/angular-1.4.6.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <it-button></it-button>
+    <primary-button></primary-button>
+
+</body>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('', function () {
+
+    });
+
+    app.directive('itButton',[function () {
+        return {
+            template:'<input type="button" value="提交" class="btn btn-success">',
+        };
+    }]);
+
+    app.directive('primaryButton',[function () {
+        return {
+            template:'<input type="button" value="提交" class="btn btn-primary">',
+        };
+    }]);
+
+
+</script>
+</html>
