@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--类库-->
+    <script src="js/angular-1.4.6.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+</head>
+<body ng-init="username='<h1>hello</h1>'">
+    <strong ng-bind-html="username"></strong>
+</body>
+<script>
+    var app = angular.module('myApp', ['ngSanitize']);
+
+</script>
+</html>
